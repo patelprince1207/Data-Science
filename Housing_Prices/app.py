@@ -1,3 +1,4 @@
+import os
 import streamlit as st
 import pandas as pd
 import numpy as np
@@ -5,6 +6,7 @@ import plotly.express as px
 
 st.set_page_config(page_title="Metro City House Price Analysis", layout="wide")
 
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 CITIES = ["Bangalore", "Chennai", "Delhi", "Hyderabad", "Kolkata", "Mumbai"]
 
 AMENITY_COLS = [
@@ -23,7 +25,7 @@ AMENITY_COLS = [
 def load_data():
     frames = []
     for city in CITIES:
-        temp = pd.read_csv(f"{city}.csv")
+        temp = pd.read_csv(os.path.join(BASE_DIR, f"{city}.csv"))
         temp["city"] = city
         frames.append(temp)
     df = pd.concat(frames, ignore_index=True)
