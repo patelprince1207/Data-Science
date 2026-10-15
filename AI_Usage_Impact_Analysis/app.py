@@ -1,4 +1,5 @@
 import streamlit as st
+from pathlib import Path
 import pandas as pd
 import numpy as np
 import plotly.express as px
@@ -8,7 +9,7 @@ st.set_page_config(page_title="AI Usage & Impact Analysis", page_icon="🤖", la
 # ---------- Load Data ----------
 @st.cache_data
 def load_data():
-    df = pd.read_csv("ai_usage_cleaned.csv")
+    df = pd.read_csv(Path(__file__).parent / "ai_usage_cleaned.csv")
     df["Plan"] = np.where(df["Monthly_AI_Cost"] == 0, "Free", "Paid")
     return df
 
